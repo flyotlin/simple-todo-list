@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container flex flex-col items-center">
+        <h1 class="text-5xl m-5 mt-[4rem] bg-gradient-to-r from-blue-600 via-[#8e2de2] to-[#4a00e0] inline-block text-transparent bg-clip-text">
+            To-Do List
+        </h1>
+
+        <form class="m-5" action="/create/task" method="post">
+            <input class="rounded-full border-solid border-black border-2 px-4 py-2" type="text" name="content" required>
+            <button class="rounded-full bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 ml-5" type="submit">Add Task</button>
+        </form>
+
+        <ul>
+            {% for task in tasks|reverse %}
+                <li>
+                    <div class="flex items-center">
+                        <div class="border-b-2 w-[14rem] pl-[0.5rem] border-indigo-500">
+                            {{ task.content }}
+                        </div>
+                        <form action="/delete/task/{{ loop.revindex0 }}" method="post" style="display:inline;">
+                            <button class="rounded-full bg-red-600 hover:bg-red-700 text-white px-5 py-2 ml-3 my-3" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- <h1 class="text-3xl font-bold underline">
+        Hello world!
+    </h1>
+    <form action="/create/task" method="post">
+        <input type="text" name="content" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <ul>
+        {% for task in tasks|reverse %}
+            <li>
+                {{ task.content }}
+                <form action="/delete/task/{{ loop.revindex0 }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul> -->
+</body>
+</html>
