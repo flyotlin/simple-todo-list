@@ -7,9 +7,6 @@ from typing import List
 
 app = FastAPI()
 
-# Static files configuration
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
 # Setting up the Jinja2 templates
 templates = Jinja2Templates(directory="templates")
 
